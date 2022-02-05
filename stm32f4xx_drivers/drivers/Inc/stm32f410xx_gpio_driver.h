@@ -18,7 +18,7 @@ typedef struct
 	uint8_t GPIO_PinNumber;			/*@GPIO_PIN_NUMBERS*/
 	uint8_t GPIO_PinMode;			/*@GPIO_PIN_MODES*/
 	uint8_t GPIO_PinSpeed;			/*@GPIO_PIN_SPEED*/
-	uint8_t GPIO_PinPuPdControl;	/*@GPIO_PUPD_CONTROL*/
+	uint8_t GPIO_PinPuPdControl;		/*@GPIO_PUPD_CONTROL*/
 	uint8_t GPIO_PinOPType;			/*@GPIO_OUTPUT_TYPE*/
 	uint8_t GPIO_PinAltFunMode;
 
@@ -92,8 +92,8 @@ typedef struct
  * GPIO pin pull up and pull down configuration macros
  */
 #define	GPIO_NO_PUPD		0	//	No pull-up, pull-down
-#define GPIO_PIN_PU			1	//	Pull-up
-#define GPIO_PIN_PD			2	// 	Pull-down
+#define GPIO_PIN_PU		1	//	Pull-up
+#define GPIO_PIN_PD		2	// 	Pull-down
 
 
 /***********************************************************************************************
