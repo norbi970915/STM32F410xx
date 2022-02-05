@@ -107,6 +107,8 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 
 	temp = 0;
 	//3. Configure the pupd settings
+	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 *pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOHandle->pGPIOx->PUPDR = temp;
 
 
 	//4. Configure the output type
