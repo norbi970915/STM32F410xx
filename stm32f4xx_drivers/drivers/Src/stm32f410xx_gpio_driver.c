@@ -93,7 +93,7 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	{
 		// the non interrupt mode
 		temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode << (2 *pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
-		pGPIOHandle->pGPIOx->MODER = temp;
+		pGPIOHandle->pGPIOx->MODER |= temp;
 	}
 	else
 	{
@@ -103,17 +103,26 @@ void GPIO_Init(GPIO_Handle_t *pGPIOHandle)
 	temp = 0;
 	//2. Configure the speed
 	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinSpeed << (2 *pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->OSPEEDER = temp;
+	pGPIOHandle->pGPIOx->OSPEEDER |= temp;
 
 	temp = 0;
 	//3. Configure the pupd settings
 	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinPuPdControl << (2 *pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber));
-	pGPIOHandle->pGPIOx->PUPDR = temp;
+	pGPIOHandle->pGPIOx->PUPDR |= temp;
 
 
+	temp = 0;
 	//4. Configure the output type
+	temp = (pGPIOHandle->GPIO_PinConfig.GPIO_PinOPType << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+	pGPIOHandle->pGPIOx->OTYPER |= temp;
 
+	
 	//5. Configure the Alternate Functionality
+	if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_ALTFN)
+	{
+		//configure the alternate function registers.
+		
+	}
 }
 
 /***************************************************************
