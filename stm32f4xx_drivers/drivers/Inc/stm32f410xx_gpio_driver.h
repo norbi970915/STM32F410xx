@@ -75,7 +75,7 @@ typedef struct
  * GPIO pin possible output type
  */
 #define GPIO_TOP_TYPE_PP	0	//	Output push-pull (reset state)
-#define GPIO_TOP_TYPE_PP	1	//	Output open-drain
+#define GPIO_TOP_TYPE_OD	1	//	Output open-drain
 
 /*
  * @GPIO_PIN_SPEED
