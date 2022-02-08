@@ -9,6 +9,8 @@
 #define INC_STM32F410XX_H_
 
 #include <stdint.h>
+#include <stdio.h>
+#include <stddef.h>
 
 #define __vo volatile
 
@@ -17,26 +19,26 @@
  */
 #define FLASH_BASEADDR			0x08000000U
 #define SRAM1_BASEADDR			0x20000000U
-#define ROM_BASEADDR			0x1FFF0000
+#define ROM_BASEADDR			0x1FFF0000U
 #define SRAM 					SRAM1_BASEADDR
 
 /*
  * AHBx and APBx Bus Peripheral base addresses
  */
-#define PERIPH_BASEADDR			0x40000000
+#define PERIPH_BASEADDR			0x40000000U
 #define APB1PERIPH_BASEADDR		PERIPH_BASEADDR
-#define APB2PERIPH_BASEADDR		0x40010000
-#define AHB1PERIPH_BASEADDR		0x40020000
+#define APB2PERIPH_BASEADDR		0x40010000U
+#define AHB1PERIPH_BASEADDR		0x40020000U
 
 
 /*
  * Base addresses of peripherals which are hanging on AHB1 bus
  */
-#define GPIOA_BASEADDR			0x40020000
-#define GPIOB_BASEADDR			0x40020400
-#define GPIOC_BASEADDR			0x40020800
-#define GPIOH_BASEADDR			0x40021C00
-#define	RCC_BASEADDR			0x40023800
+#define GPIOA_BASEADDR			(AHB1PERIPH_BASEADDR + 0x0000U)
+#define GPIOB_BASEADDR			(AHB1PERIPH_BASEADDR + 0x0400U)
+#define GPIOC_BASEADDR			(AHB1PERIPH_BASEADDR + 0x0800U)
+#define GPIOH_BASEADDR			(AHB1PERIPH_BASEADDR + 0x1C00U)
+#define	RCC_BASEADDR			(AHB1PERIPH_BASEADDR + 0x3800U)
 
 /*
  * Base addresses of peripherals which are hanging on APB1 bus
@@ -81,49 +83,61 @@ typedef struct
 
 typedef struct
 {
-	__vo uint32_t CR;				/*RCC clock control register									0x00*/
-	__vo uint32_t PLLCFGR;			/*RCC PLL configuration register								0x04*/
-	__vo uint32_t CFGR;				/*RCC clock configuration register								0x08*/
-	__vo uint32_t CIR;				/*RCC clock interrupt register									0x0C*/
-	__vo uint32_t AHB1RSTR;			/*RCC AHB1 peripheral reset register							0x10*/
-	uint32_t	  RESERVED0;		/*Reserved, 0x14 - 0x1C*/
-	__vo uint32_t APB1RSTR;			/*RCC APB1 peripheral reset register*/
-	__vo uint32_t APB2RSTR;			/*RCC APB2 peripheral reset register							0x24*/
-	uint32_t	  RESERVED1[2];		/*Reserved, 0x28 - 0x2C*/
-	__vo uint32_t AHB1ENR;			/*RCC AHB1 peripheral clock enable register						0x30*/
-	uint32_t	  RESERVED2[2];		/*Reserved, 0x34 - 0x3C*/
-	__vo uint32_t APB1ENR;			/*RCC APB1 peripheral clock enable register						0x40*/
-	__vo uint32_t APB2ENR;			/*RCC APB2 peripheral clock enable register						0x44*/
-	uint32_t	  RESERVED3[2];		/*Reserved, 0x48 - 0x4C*/
-	__vo uint32_t AHB1LPENR;		/*RCC AHB1 peripheral clock enable in low power mode register	0x50*/
-	uint32_t	  RESERVED4[2];		/*Reserved, 0x54 - 0x5C*/
-	__vo uint32_t APB1LPENR;		/*RCC APB1 peripheral clock enable in low power mode register	0x60*/
-	__vo uint32_t APB2LPENR;		/*RCC APB2 peripheral clock enabled in low power mode register	0x64*/
-	uint32_t	  RESERVED5[2];		/*Reserved, 0x68 - 0x6C*/
-	__vo uint32_t BCDR;				/*RCC Backup domain control register							0x70*/
-	__vo uint32_t CSR;				/*RCC clock control & status register							0x74*/
-	uint32_t	  RESERVED6[2];		/*Reserved, 0x78 - 0x7C*/
-	__vo uint32_t SSCGR;			/*RCC spread spectrum clock generation register					0x80*/
-	uint32_t	  RESERVED7[2];		/*Reserved, 0x84 - 0x88*/
-	__vo uint32_t DCKCFGR;			/*RCC Dedicated Clocks Configuration Register					0x8C*/
-	uint32_t	  RESERVED8[2];		/*Reserved, 0x90*/
-	__vo uint32_t DCKCFGR2;			/*RCC dedicated Clocks Configuration Register 2					0x94*/
 
+	__vo uint32_t CR;		 	  /*RCC clock control register  		   				Address offset :0x00 */
+	__vo uint32_t PLLCFGR; 	   	  /*RCC PLL configuration register      				Address offset :0x04 */
+	__vo uint32_t CFGR;   	 	  /*RCC clock configuration register  					Address offset :0x08 */
+	__vo uint32_t CIR;  		  /*RCC clock interrupt register		 				Address offset :0x0C */
+	__vo uint32_t AHB1RSTR;    	  /*RCC AHB1 peripheral reset register			   		Address offset :0x10 */
+	__vo uint32_t AHB2RSTR;  	  /*RCC AHB2 peripheral reset register  				Address offset :0x14 */
+	__vo uint32_t AHB3RSTR;  	  /*RCC AHB3 peripheral reset register					Address offset :0x18 */
+		 uint32_t RESERVED1;	  /*Reserved Register									Address offset :0x1C */
+	__vo uint32_t APB1RSTR;  	  /*RCC APB1 peripheral reset register 					Address offset :0x20 */
+	__vo uint32_t APB2RSTR;  	  /*RCC APB2 peripheral reset register					Address offset :0x24 */
+	 	 uint32_t RESERVED2;	  /*Reserved Register									Address offset :0x28 */
+		 uint32_t RESERVED3;	  /*Reserved Register									Address offset :0x2C */
+	__vo uint32_t AHB1ENR;  	  /*RCC AHB1 peripheral clock enable register			Address offset :0x30 */
+	__vo uint32_t AHB2ENR;  	  /*RCC AHB2 peripheral clock enable register			Address offset :0x34 */
+	__vo uint32_t AHB3ENR;  	  /*RCC AHB2 peripheral clock enable register			Address offset :0x38 */
+	 	 uint32_t RESERVED4;	  /*Reserved Register									Address offset :0x3C */
+	__vo uint32_t APB1ENR;  	  /*RCC APB1 peripheral clock enable register			Address offset :0x40 */
+	__vo uint32_t APB2ENR;  	  /*RCC APB2 peripheral clock enable register			Address offset :0x44 */
+	 	 uint32_t RESERVED5;	  /*Reserved Register									Address offset :0x48 */
+	 	 uint32_t RESERVED6;	  /*Reserved Register									Address offset :0x4C */
+	__vo uint32_t AHB1LPENR;  	  /*RCC AHB1 peripheral clock enable
+	 	 	 	 	 	 	 	 	in low power mode register							Address offset :0x50 */
+	__vo uint32_t AHB2LPENR;  	  /*RCC AHB2 peripheral clock enable
+									in low power mode register							Address offset :0x54 */
+	__vo uint32_t AHB3LPENR;  	  /*RCC AHB3 peripheral clock enable
+									in low power mode register							Address offset :0x58 */
+	 	 uint32_t RESERVED7;	  /*Reserved Register									Address offset :0x5C */
+	__vo uint32_t APB1LPENR;  	  /*RCC APB1 peripheral clock enable
+									in low power mode register							Address offset :0x60 */
 
+	__vo uint32_t APB2LPENR;  	  /*RCC APB2 peripheral clock enable
+									in low power mode register							Address offset :0x64 */
+
+	 	 uint32_t RESERVED8;	  /*Reserved Register									Address offset :0x68 */
+		 uint32_t RESERVED9;	  /*Reserved Register									Address offset :0x6C */
+	__vo uint32_t BDCR;  	      /*RCC Backup domain control register				    Address offset :0x70 */
+	__vo uint32_t CSR;  	      /*RCC clock control & status register				    Address offset :0x74 */
+	 	 uint32_t RESERVED10;	  /*Reserved Register									Address offset :0x78 */
+		 uint32_t RESERVED11;	  /*Reserved Register									Address offset :0x7C */
+	__vo uint32_t SSCGR;  	      /*RCC spread spectrum clock generation register		Address offset :0x80 */
+	__vo uint32_t PLLI2SCFGR;	  /*RCC PLLI2S configuration register				    Address offset :0x84 */
 }RCC_RegDef_t;
-
 
 
 /*
  * peripheral definitions (peripheral base addresses typecasted to xxx_RegDef_t)
  */
 
-#define GPIOA 	((GPIO_RegDef_t*)GPIOA_BASEADDR)
-#define GPIOB 	((GPIO_RegDef_t*)GPIOB_BASEADDR)
-#define GPIOC 	((GPIO_RegDef_t*)GPIOC_BASEADDR)
-#define GPIOH 	((GPIO_RegDef_t*)GPIOH_BASEADDR)
+#define GPIOA 	((GPIO_RegDef_t *)GPIOA_BASEADDR)
+#define GPIOB 	((GPIO_RegDef_t *)GPIOB_BASEADDR)
+#define GPIOC 	((GPIO_RegDef_t *)GPIOC_BASEADDR)
+#define GPIOH 	((GPIO_RegDef_t *)GPIOH_BASEADDR)
 
-#define RCC		((RCC_RegDef_t*)RCC_BASEADDR)
+#define RCC		((RCC_RegDef_t *)RCC_BASEADDR)
 
 
 /* CLOCK ENABLE MACROS*/
@@ -133,7 +147,7 @@ typedef struct
 #define GPIOA_PCLK_EN()		(RCC->AHB1ENR |= (1 << 0))
 #define GPIOB_PCLK_EN()		(RCC->AHB1ENR |= (1 << 1))
 #define GPIOC_PCLK_EN()		(RCC->AHB1ENR |= (1 << 2))
-#define GPIOH_PCLK_EN()		(RCC->AHB1ENR |= (1 << 4))
+#define GPIOH_PCLK_EN()		(RCC->AHB1ENR |= (1 << 7))
 
 /*
  * Clock ENABLE macros for I2Cx peripherals
@@ -169,7 +183,7 @@ typedef struct
 #define GPIOA_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 0))
 #define GPIOB_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 1))
 #define GPIOC_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 2))
-#define GPIOH_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 4))
+#define GPIOH_PCLK_DI()		(RCC->AHB1ENR &= ~(1 << 7))
 
 /*
  * Clock DISABLE macros for I2Cx peripherals
@@ -202,8 +216,7 @@ typedef struct
 #define GPIOA_REG_RESET()	do{	(RCC->AHB1RSTR |= (1 << 0));	(RCC->AHB1RSTR &= ~(1 << 0));	} while(0)
 #define GPIOB_REG_RESET()	do{	(RCC->AHB1RSTR |= (1 << 1));	(RCC->AHB1RSTR &= ~(1 << 1));	} while(0)
 #define GPIOC_REG_RESET()	do{	(RCC->AHB1RSTR |= (1 << 2));	(RCC->AHB1RSTR &= ~(1 << 2));	} while(0)
-#define GPIOH_REG_RESET()	do{	(RCC->AHB1RSTR |= (1 << 4));	(RCC->AHB1RSTR &= ~(1 << 4));	} while(0)
-
+#define GPIOH_REG_RESET()	do{	(RCC->AHB1RSTR |= (1 << 7));	(RCC->AHB1RSTR &= ~(1 << 7));	} while(0)
 
 /*
  *  Generic macros
@@ -216,4 +229,7 @@ typedef struct
 #define GPIO_PIN_RESET	RESET
 
 
+
+
 #endif /* INC_STM32F410XX_H_ */
+
