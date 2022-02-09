@@ -14,6 +14,33 @@
 
 #define __vo volatile
 
+
+/*
+ *  ARM cortex M4 processor NVIC ISERx register Addressess
+ */
+
+#define NVIC_ISER0		((__vo uint32_t *)0xE000E100)
+#define NVIC_ISER1		((__vo uint32_t *)0xE000E104)
+#define NVIC_ISER2		((__vo uint32_t *)0xE000E108)
+#define NVIC_ISER3		((__vo uint32_t *)0xE000E10C)
+
+/*
+ *  ARM cortex M4 processor NVIC ICERx register Addressess
+ */
+
+#define NVIC_ICER0		((__vo uint32_t *)0XE000E180)
+#define NVIC_ICER1		((__vo uint32_t *)0XE000E184)
+#define NVIC_ICER2		((__vo uint32_t *)0XE000E188)
+#define NVIC_ICER3		((__vo uint32_t *)0XE000E18C)
+
+/*
+ *  ARM cortex M4 processor NVIC priority register base address
+ */
+#define NVIC_PR_BASEADDR		((__vo uint32_t *)0xE000E400)
+
+#define NO_PR_BITS_IMPELMENTED	4
+
+
 /*
  * base addresses of Flash and SRAM memories
  */
@@ -66,6 +93,9 @@
 
 /*************************Peripheral register definition structures********************************/
 
+/*
+ * the Peripheral register definition structure for GPIO
+ */
 typedef struct
 {
 	__vo uint32_t MODER;			/*GPIO port mode register*/
@@ -81,6 +111,9 @@ typedef struct
 }GPIO_RegDef_t;
 
 
+/*
+ * the Peripheral register definition structure for RCC
+ */
 typedef struct
 {
 
@@ -129,6 +162,34 @@ typedef struct
 
 
 /*
+ * the Peripheral register definition structure for RCC
+ */
+typedef struct{
+
+	__vo uint32_t IMR; 			/*      Interrupt mask register    		  */
+	__vo uint32_t EMR;			/*      Event mask register	    		  */
+	__vo uint32_t RTSR;			/*      Rising trigger selection register    */
+	__vo uint32_t FTSR;			/*      Falling trigger selection register	  */
+	__vo uint32_t SWIER;		/*      Software interrupt event register	  */
+	__vo uint32_t PR;			/*      Pending register		    		  */
+
+}EXTI_RegDef_t;
+
+/*
+ * the Peripheral register definition structure for SYSCONFIG
+ */
+typedef struct{
+
+	__vo uint32_t MEMRMP;
+	__vo uint32_t PMC;
+	__vo uint32_t EXTICR[4];
+	__vo uint32_t CFGR2;
+	__vo uint32_t CMPCR;
+	__vo uint32_t CFGR;
+}SYSCFG_RegDef_t;
+
+
+/*
  * peripheral definitions (peripheral base addresses typecasted to xxx_RegDef_t)
  */
 
@@ -138,6 +199,10 @@ typedef struct
 #define GPIOH 	((GPIO_RegDef_t *)GPIOH_BASEADDR)
 
 #define RCC		((RCC_RegDef_t *)RCC_BASEADDR)
+
+#define EXTI	((EXTI_RegDef_t *)EXTI_BASEADDR)
+
+#define SYSCFG	((SYSCFG_RegDef_t *)SYSCFG_BASEADDR)
 
 
 /* CLOCK ENABLE MACROS*/
@@ -218,6 +283,34 @@ typedef struct
 #define GPIOC_REG_RESET()	do{	(RCC->AHB1RSTR |= (1 << 2));	(RCC->AHB1RSTR &= ~(1 << 2));	} while(0)
 #define GPIOH_REG_RESET()	do{	(RCC->AHB1RSTR |= (1 << 7));	(RCC->AHB1RSTR &= ~(1 << 7));	} while(0)
 
+
+/*
+ * returns port code for given GPIOx address
+ */
+#define GPIO_BASEADDR_TO_CODE(x)	((x==GPIOA)?0  :\
+									 (x==GPIOB)?1  :\
+									 (x==GPIOC)?2  :\
+									 (x==GPIOH)?7  :0)
+
+
+/*
+ * Definitions of the IRQ number of interrupt line
+ */
+#define IRQ_NO_EXTI0				6
+#define IRQ_NO_EXTI1				7
+#define IRQ_NO_EXTI2				8
+#define IRQ_NO_EXTI3				9
+#define IRQ_NO_EXTI4				10
+#define IRQ_NO_EXTI9_5				23
+#define IRQ_NO_EXTI15_10			40
+
+
+#define NVIC_IRQ_PRI0				0
+#define NVIC_IRQ_PRI1				1
+#define NVIC_IRQ_PRI2				2
+#define NVIC_IRQ_PRI3				3
+#define NVIC_IRQ_PRI4				4
+
 /*
  *  Generic macros
  */
@@ -232,4 +325,3 @@ typedef struct
 
 
 #endif /* INC_STM32F410XX_H_ */
-
