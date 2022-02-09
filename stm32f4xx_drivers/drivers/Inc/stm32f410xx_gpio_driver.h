@@ -18,7 +18,7 @@ typedef struct
 	uint8_t GPIO_PinNumber;			/*@GPIO_PIN_NUMBERS*/
 	uint8_t GPIO_PinMode;			/*@GPIO_PIN_MODES*/
 	uint8_t GPIO_PinSpeed;			/*@GPIO_PIN_SPEED*/
-	uint8_t GPIO_PinPuPdControl;		/*@GPIO_PUPD_CONTROL*/
+	uint8_t GPIO_PinPuPdControl;	/*@GPIO_PUPD_CONTROL*/
 	uint8_t GPIO_PinOPType;			/*@GPIO_OUTPUT_TYPE*/
 	uint8_t GPIO_PinAltFunMode;
 
@@ -74,8 +74,8 @@ typedef struct
  * @GPIO_OUTPUT_TYPE
  * GPIO pin possible output type
  */
-#define GPIO_TOP_TYPE_PP	0	//	Output push-pull (reset state)
-#define GPIO_TOP_TYPE_OD	1	//	Output open-drain
+#define GPIO_OP_TYPE_PP	0	//	Output push-pull (reset state)
+#define GPIO_OP_TYPE_OD	1	//	Output open-drain
 
 /*
  * @GPIO_PIN_SPEED
@@ -92,8 +92,8 @@ typedef struct
  * GPIO pin pull up and pull down configuration macros
  */
 #define	GPIO_NO_PUPD		0	//	No pull-up, pull-down
-#define GPIO_PIN_PU		1	//	Pull-up
-#define GPIO_PIN_PD		2	// 	Pull-down
+#define GPIO_PIN_PU			1	//	Pull-up
+#define GPIO_PIN_PD			2	// 	Pull-down
 
 
 /***********************************************************************************************
@@ -123,19 +123,9 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
 /*
  * IRQ COnfiguration and ISR handling
  */
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnorDi);
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi);
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber, uint32_t IRQPriority);
 void GPIO_IRQHandling(uint8_t PinNumber);
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif /* INC_STM32F410XX_GPIO_DRIVER_H_ */
