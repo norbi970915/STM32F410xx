@@ -36,7 +36,7 @@
 /*
  *  ARM cortex M4 processor NVIC priority register base address
  */
-#define NVIC_PR_BASEADDR		((__vo uint32_t *)0xE000E400)
+#define NVIC_PR_BASEADDR	((__vo uint32_t *)0xE000E400)
 
 #define NO_PR_BITS_IMPELMENTED	4
 
@@ -47,7 +47,7 @@
 #define FLASH_BASEADDR			0x08000000U
 #define SRAM1_BASEADDR			0x20000000U
 #define ROM_BASEADDR			0x1FFF0000U
-#define SRAM 					SRAM1_BASEADDR
+#define SRAM 				SRAM1_BASEADDR
 
 /*
  * AHBx and APBx Bus Peripheral base addresses
@@ -102,10 +102,10 @@ typedef struct
 	__vo uint32_t OTYPER;			/*GPIO port output type register*/
 	__vo uint32_t OSPEEDER;			/*GPIO port output speed register*/
 	__vo uint32_t PUPDR;			/*GPIO port pull-up/pull-down register*/
-	__vo uint32_t IDR;				/*GPIO port input data register*/
-	__vo uint32_t ODR;				/*GPIO port output data register*/
-	__vo uint32_t BSRR;				/*GPIO port bit set/reset register*/
-	__vo uint32_t LCKR;				/*GPIO port configuration lock register*/
+	__vo uint32_t IDR;			/*GPIO port input data register*/
+	__vo uint32_t ODR;			/*GPIO port output data register*/
+	__vo uint32_t BSRR;			/*GPIO port bit set/reset register*/
+	__vo uint32_t LCKR;			/*GPIO port configuration lock register*/
 	__vo uint32_t AFR[2];			/*GPIO alternate function register  AFR[0] - Low / AFR[1] - High*/
 
 }GPIO_RegDef_t;
@@ -117,47 +117,47 @@ typedef struct
 typedef struct
 {
 
-	__vo uint32_t CR;		 	  /*RCC clock control register  		   				Address offset :0x00 */
+	__vo uint32_t CR;		  /*RCC clock control register  		   			Address offset :0x00 */
 	__vo uint32_t PLLCFGR; 	   	  /*RCC PLL configuration register      				Address offset :0x04 */
 	__vo uint32_t CFGR;   	 	  /*RCC clock configuration register  					Address offset :0x08 */
-	__vo uint32_t CIR;  		  /*RCC clock interrupt register		 				Address offset :0x0C */
+	__vo uint32_t CIR;  		  /*RCC clock interrupt register		 			Address offset :0x0C */
 	__vo uint32_t AHB1RSTR;    	  /*RCC AHB1 peripheral reset register			   		Address offset :0x10 */
 	__vo uint32_t AHB2RSTR;  	  /*RCC AHB2 peripheral reset register  				Address offset :0x14 */
 	__vo uint32_t AHB3RSTR;  	  /*RCC AHB3 peripheral reset register					Address offset :0x18 */
-		 uint32_t RESERVED1;	  /*Reserved Register									Address offset :0x1C */
+		 uint32_t RESERVED1;	  /*Reserved Register							Address offset :0x1C */
 	__vo uint32_t APB1RSTR;  	  /*RCC APB1 peripheral reset register 					Address offset :0x20 */
 	__vo uint32_t APB2RSTR;  	  /*RCC APB2 peripheral reset register					Address offset :0x24 */
-	 	 uint32_t RESERVED2;	  /*Reserved Register									Address offset :0x28 */
-		 uint32_t RESERVED3;	  /*Reserved Register									Address offset :0x2C */
-	__vo uint32_t AHB1ENR;  	  /*RCC AHB1 peripheral clock enable register			Address offset :0x30 */
-	__vo uint32_t AHB2ENR;  	  /*RCC AHB2 peripheral clock enable register			Address offset :0x34 */
-	__vo uint32_t AHB3ENR;  	  /*RCC AHB2 peripheral clock enable register			Address offset :0x38 */
-	 	 uint32_t RESERVED4;	  /*Reserved Register									Address offset :0x3C */
-	__vo uint32_t APB1ENR;  	  /*RCC APB1 peripheral clock enable register			Address offset :0x40 */
-	__vo uint32_t APB2ENR;  	  /*RCC APB2 peripheral clock enable register			Address offset :0x44 */
-	 	 uint32_t RESERVED5;	  /*Reserved Register									Address offset :0x48 */
-	 	 uint32_t RESERVED6;	  /*Reserved Register									Address offset :0x4C */
+	 	 uint32_t RESERVED2;	  /*Reserved Register							Address offset :0x28 */
+		 uint32_t RESERVED3;	  /*Reserved Register							Address offset :0x2C */
+	__vo uint32_t AHB1ENR;  	  /*RCC AHB1 peripheral clock enable register				Address offset :0x30 */
+	__vo uint32_t AHB2ENR;  	  /*RCC AHB2 peripheral clock enable register				Address offset :0x34 */
+	__vo uint32_t AHB3ENR;  	  /*RCC AHB2 peripheral clock enable register				Address offset :0x38 */
+	 	 uint32_t RESERVED4;	  /*Reserved Register							Address offset :0x3C */
+	__vo uint32_t APB1ENR;  	  /*RCC APB1 peripheral clock enable register				Address offset :0x40 */
+	__vo uint32_t APB2ENR;  	  /*RCC APB2 peripheral clock enable register				Address offset :0x44 */
+	 	 uint32_t RESERVED5;	  /*Reserved Register							Address offset :0x48 */
+	 	 uint32_t RESERVED6;	  /*Reserved Register							Address offset :0x4C */
 	__vo uint32_t AHB1LPENR;  	  /*RCC AHB1 peripheral clock enable
-	 	 	 	 	 	 	 	 	in low power mode register							Address offset :0x50 */
+	 	 	 	 	 	 	 	 	in low power mode register		Address offset :0x50 */
 	__vo uint32_t AHB2LPENR;  	  /*RCC AHB2 peripheral clock enable
-									in low power mode register							Address offset :0x54 */
+									in low power mode register		Address offset :0x54 */
 	__vo uint32_t AHB3LPENR;  	  /*RCC AHB3 peripheral clock enable
-									in low power mode register							Address offset :0x58 */
-	 	 uint32_t RESERVED7;	  /*Reserved Register									Address offset :0x5C */
+									in low power mode register		Address offset :0x58 */
+	 	 uint32_t RESERVED7;	  /*Reserved Register							Address offset :0x5C */
 	__vo uint32_t APB1LPENR;  	  /*RCC APB1 peripheral clock enable
-									in low power mode register							Address offset :0x60 */
+									in low power mode register		Address offset :0x60 */
 
 	__vo uint32_t APB2LPENR;  	  /*RCC APB2 peripheral clock enable
-									in low power mode register							Address offset :0x64 */
+									in low power mode register		Address offset :0x64 */
 
-	 	 uint32_t RESERVED8;	  /*Reserved Register									Address offset :0x68 */
-		 uint32_t RESERVED9;	  /*Reserved Register									Address offset :0x6C */
-	__vo uint32_t BDCR;  	      /*RCC Backup domain control register				    Address offset :0x70 */
-	__vo uint32_t CSR;  	      /*RCC clock control & status register				    Address offset :0x74 */
-	 	 uint32_t RESERVED10;	  /*Reserved Register									Address offset :0x78 */
-		 uint32_t RESERVED11;	  /*Reserved Register									Address offset :0x7C */
-	__vo uint32_t SSCGR;  	      /*RCC spread spectrum clock generation register		Address offset :0x80 */
-	__vo uint32_t PLLI2SCFGR;	  /*RCC PLLI2S configuration register				    Address offset :0x84 */
+	 	 uint32_t RESERVED8;	  /*Reserved Register							Address offset :0x68 */
+		 uint32_t RESERVED9;	  /*Reserved Register							Address offset :0x6C */
+	__vo uint32_t BDCR;  	     /*RCC Backup domain control register				   	 Address offset :0x70 */
+	__vo uint32_t CSR;  	      /*RCC clock control & status register				   	 Address offset :0x74 */
+	 	 uint32_t RESERVED10;	  /*Reserved Register							Address offset :0x78 */
+		 uint32_t RESERVED11;	  /*Reserved Register							Address offset :0x7C */
+	__vo uint32_t SSCGR;  	      /*RCC spread spectrum clock generation register				Address offset :0x80 */
+	__vo uint32_t PLLI2SCFGR;	  /*RCC PLLI2S configuration register				    	Address offset :0x84 */
 }RCC_RegDef_t;
 
 
@@ -316,10 +316,10 @@ typedef struct{
  */
 #define ENABLE 			1
 #define DISABLE 		0
-#define SET				ENABLE
+#define SET			ENABLE
 #define RESET 			DISABLE
-#define	GPIO_PIN_SET	SET
-#define GPIO_PIN_RESET	RESET
+#define	GPIO_PIN_SET		SET
+#define GPIO_PIN_RESET		RESET
 
 
 
